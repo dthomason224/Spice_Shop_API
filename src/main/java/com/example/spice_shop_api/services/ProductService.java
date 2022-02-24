@@ -2,7 +2,6 @@ package com.example.spice_shop_api.services;
 
 import com.example.spice_shop_api.models.Product;
 import com.example.spice_shop_api.repositories.ProductRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +22,10 @@ public class ProductService {
 
     public ResponseEntity<List<Product>> getAllProducts(String name) {
         try {
-            List<Product> products = new ArrayList<Product>();
+            List<Product> products = new ArrayList<>();
             if (name == null) {
                 products.addAll(productRepository.findAll());
-            }
-            else {
+            } else {
                 products.addAll(productRepository.findByNameContaining(name));
             }
             if (products.isEmpty()) {
@@ -56,4 +54,30 @@ public class ProductService {
         }
     }
 
+    public ResponseEntity<Product> updateProduct(Long productId, Product productChanges) {
+        Optional<Product> productObject = productRepository.findById(productId);
+        if (productObject.isPresent()) {
+            Product productCurrent = productObject.get();
+
+            productCurrent.setName(productChanges.getName());
+            productCurrent.setDescription(productChanges.getDescription());
+            productCurrent.setImage(productChanges.getImage());
+            productCurrent.setPrice(productChanges.getPrice());
+            productCurrent.setStock(productChanges.getStock());
+
+            return new ResponseEntity<>(productRepository.save(productCurrent), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<Product> deleteProduct(Long productId) {
+        try {
+            productRepository.deleteById(productId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }

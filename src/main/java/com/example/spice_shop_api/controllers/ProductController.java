@@ -1,13 +1,11 @@
 package com.example.spice_shop_api.controllers;
 
 import com.example.spice_shop_api.models.Product;
-import com.example.spice_shop_api.repositories.ProductRepository;
 import com.example.spice_shop_api.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,15 +33,15 @@ public class ProductController {
         return productService.createProduct(product);
     }
 
-//    @PutMapping("/products/{productId}")
-//    public ResponseEntity<Product> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product newProduct) {
-//
-//    }
-//
-//    @DeleteMapping("/products/{productId}")
-//    public void deleteCategory(@PathVariable(value = "productId") Long productId) {
-//
-//    }
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product updatedProduct) {
+        return productService.updateProduct(productId, updatedProduct);
+    }
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<Product> deleteCategory(@PathVariable(value = "productId") Long productId) {
+        return productService.deleteProduct(productId);
+    }
 
 
 }
