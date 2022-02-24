@@ -35,12 +35,14 @@ public class ProductService {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     public ResponseEntity<Product> getProductById(Long productId) {
         Optional<Product> productObject = productRepository.findById(productId);
         return productObject.map(product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+
     }
 
     public ResponseEntity<Product> createProduct(Product productObject) {
@@ -52,6 +54,7 @@ public class ProductService {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     public ResponseEntity<Product> updateProduct(Long productId, Product productChanges) {
@@ -69,6 +72,7 @@ public class ProductService {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
     }
 
     public ResponseEntity<Product> deleteProduct(Long productId) {
