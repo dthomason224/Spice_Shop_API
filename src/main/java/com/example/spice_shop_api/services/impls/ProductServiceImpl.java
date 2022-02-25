@@ -56,6 +56,11 @@ public class ProductServiceImpl implements ProductService {
 
     public ResponseEntity<Product> createProduct(Product productObject) {
         try {
+            Category category = categoryRepository.findById(productObject.getCategory().getId())
+                    .orElseThrow(IllegalArgumentException::new);
+
+            productObject.setCategory(category);
+
             Product newProduct = productRepository
                     .save(new Product(productObject));
             return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
