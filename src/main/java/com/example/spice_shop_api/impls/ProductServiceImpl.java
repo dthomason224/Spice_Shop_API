@@ -1,6 +1,8 @@
 package com.example.spice_shop_api.impls;
 
+import com.example.spice_shop_api.models.Category;
 import com.example.spice_shop_api.models.Product;
+import com.example.spice_shop_api.repositories.CategoryRepository;
 import com.example.spice_shop_api.repositories.ProductRepository;
 import com.example.spice_shop_api.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,16 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    @Autowired
+    public void setCategoryRepository(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     public ResponseEntity<List<Product>> getAllProducts(String name) {

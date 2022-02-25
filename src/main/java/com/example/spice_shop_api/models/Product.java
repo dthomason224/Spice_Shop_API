@@ -1,5 +1,8 @@
 package com.example.spice_shop_api.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Table(name = "products")
 public class Product {
     @Id
@@ -28,6 +31,10 @@ public class Product {
 
     @Column(name = "stock")
     private Integer stock;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Product(Long id, String name, String description, Double price, String image, Integer stock) {
         this.id = id;

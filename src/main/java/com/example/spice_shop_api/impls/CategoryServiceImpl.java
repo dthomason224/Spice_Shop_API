@@ -21,6 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    @Override
     public ResponseEntity<List<Category>> getAllCategories(String name) {
         try {
             List<Category> products = new ArrayList<>();
@@ -39,6 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
     public ResponseEntity<Category> getCategoryById(Long categoryId) {
         Optional<Category> categoryObject = categoryRepository.findById(categoryId);
         return categoryObject.map(category -> new ResponseEntity<>(category, HttpStatus.OK))
@@ -46,6 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
     public ResponseEntity<Category> createCategory(Category categoryObject) {
         try {
             Category newCategory = categoryRepository
@@ -57,6 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
     public ResponseEntity<Category> updateCategory(Long productId, Category categoryChanges) {
         Optional<Category> categoryObject = categoryRepository.findById(productId);
         if (categoryObject.isPresent()) {
@@ -72,6 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
     public ResponseEntity<Category> deleteCategory(Long categoryId) {
         try {
             categoryRepository.deleteById(categoryId);
@@ -81,4 +86,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
     }
+
+    @Override
+    public ResponseEntity<Category> addCategoryToProduct(Category categoryObject, Long productId) {
+        return null;
+    }
+
+
 }

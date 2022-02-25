@@ -11,5 +11,6 @@ public interface CategoryService {
     ResponseEntity<Category> createCategory(Category categoryObject);
     ResponseEntity<Category> updateCategory(Long categoryId, Category categoryChanges);
     ResponseEntity<Category> deleteCategory(Long categoryId);
+    ResponseEntity<Category> addCategoryToProduct(Category categoryObject, Long productId);
 
 }
