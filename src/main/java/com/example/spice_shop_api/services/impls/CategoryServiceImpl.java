@@ -61,8 +61,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResponseEntity<Category> updateCategory(Long productId, Category categoryChanges) {
-        Optional<Category> categoryObject = categoryRepository.findById(productId);
+    public ResponseEntity<Category> updateCategory(Long categoryId, Category categoryChanges) {
+        Optional<Category> categoryObject = categoryRepository.findById(categoryId);
         if (categoryObject.isPresent()) {
             Category categoryCurrent = categoryObject.get();
 
