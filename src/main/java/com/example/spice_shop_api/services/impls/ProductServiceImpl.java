@@ -1,4 +1,4 @@
-package com.example.spice_shop_api.impls;
+package com.example.spice_shop_api.services.impls;
 
 import com.example.spice_shop_api.models.Category;
 import com.example.spice_shop_api.models.Product;
@@ -57,8 +57,7 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<Product> createProduct(Product productObject) {
         try {
             Product newProduct = productRepository
-                    .save(new Product(productObject.getId(), productObject.getName(), productObject.getDescription(),
-                            productObject.getPrice(), productObject.getImage(), productObject.getStock()));
+                    .save(new Product(productObject));
             return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

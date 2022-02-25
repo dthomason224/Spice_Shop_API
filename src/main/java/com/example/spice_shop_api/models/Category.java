@@ -30,4 +30,9 @@ public class Category {
         this.name = name;
         this.description = description;
     }
+
+    public Category(Category categoryObject) {
+        this.description = categoryObject.getDescription();
+        this.name = categoryObject.getName();
+    }
 }

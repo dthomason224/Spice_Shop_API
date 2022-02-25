@@ -1,4 +1,4 @@
-package com.example.spice_shop_api.impls;
+package com.example.spice_shop_api.services.impls;
 
 import com.example.spice_shop_api.models.Category;
 import com.example.spice_shop_api.repositories.CategoryRepository;
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
     public ResponseEntity<Category> createCategory(Category categoryObject) {
         try {
             Category newCategory = categoryRepository
-                    .save(new Category(categoryObject.getId(), categoryObject.getName(), categoryObject.getDescription()));
+                    .save(new Category(categoryObject));
             return new ResponseEntity<>(newCategory, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

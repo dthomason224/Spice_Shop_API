@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -43,5 +44,14 @@ public class Product {
         this.price = price;
         this.image = image;
         this.stock = stock;
+    }
+
+    public Product(Product productObject) {
+        this.name = productObject.getName();
+        this.description = productObject.getDescription();
+        this.price = productObject.getPrice();
+        this.image = productObject.getImage();
+        this.stock = productObject.getStock();
+        this.category = productObject.getCategory();
     }
 }
