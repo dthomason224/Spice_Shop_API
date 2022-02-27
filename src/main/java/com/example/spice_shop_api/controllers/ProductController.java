@@ -18,12 +18,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
+    @GetMapping("/products/")
     public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String name) {
         return productService.getAllProducts(name);
     }
 
-    @GetMapping("/products/{productId}")
+    @GetMapping("/products/{productId}/")
     public ResponseEntity<Product> getProduct(@PathVariable(value = "productId") Long productId) {
         return productService.getProductById(productId);
     }
@@ -33,12 +33,12 @@ public class ProductController {
         return productService.createProduct(product);
     }
 
-    @PutMapping("/products/{productId}")
+    @PutMapping("/products/{productId}/")
     public ResponseEntity<Product> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product updatedProduct) {
         return productService.updateProduct(productId, updatedProduct);
     }
 
-    @DeleteMapping("/products/{productId}")
+    @DeleteMapping("/products/{productId}/")
     public ResponseEntity<Product> deleteCategory(@PathVariable(value = "productId") Long productId) {
         return productService.deleteProduct(productId);
     }

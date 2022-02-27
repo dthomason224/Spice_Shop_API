@@ -2,6 +2,7 @@ package com.example.spice_shop_api.services.impls;
 
 import com.example.spice_shop_api.models.Category;
 import com.example.spice_shop_api.models.Product;
+import com.example.spice_shop_api.repositories.CartItemRepository;
 import com.example.spice_shop_api.repositories.CategoryRepository;
 import com.example.spice_shop_api.repositories.ProductRepository;
 import com.example.spice_shop_api.services.ProductService;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
+    private CartItemRepository cartItemRepository;
 
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
@@ -27,6 +29,11 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+    }
+
+    @Autowired
+    public void setCartItemRepository(CartItemRepository cartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
     }
 
     public ResponseEntity<List<Product>> getAllProducts(String name) {
@@ -72,6 +79,12 @@ public class ProductServiceImpl implements ProductService {
 
     public ResponseEntity<Product> updateProduct(Long productId, Product productChanges) {
         Optional<Product> productObject = productRepository.findById(productId);
+
+        Category category = categoryRepository.findById(productChanges.getCategory().getId())
+                .orElseThrow(IllegalArgumentException::new);
+
+        productChanges.setCategory(category);
+
         if (productObject.isPresent()) {
             Product productCurrent = productObject.get();
 
@@ -80,6 +93,7 @@ public class ProductServiceImpl implements ProductService {
             productCurrent.setImage(productChanges.getImage());
             productCurrent.setPrice(productChanges.getPrice());
             productCurrent.setStock(productChanges.getStock());
+            productCurrent.setCategory(productChanges.getCategory());
 
             return new ResponseEntity<>(productRepository.save(productCurrent), HttpStatus.OK);
         } else {

@@ -18,12 +18,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/categories")
+    @GetMapping("/categories/")
     public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String name) {
         return categoryService.getAllCategories(name);
     }
 
-    @GetMapping("/categories/{categoryId}")
+    @GetMapping("/categories/{categoryId}/")
     public ResponseEntity<Category> getCategory(@PathVariable(value = "categoryId") Long categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
@@ -33,12 +33,12 @@ public class CategoryController {
         return categoryService.createCategory(category);
     }
 
-    @PutMapping("/categories/{categoryId}")
+    @PutMapping("/categories/{categoryId}/")
     public ResponseEntity<Category> updateCategory(@PathVariable(value = "categoryId") Long categoryId, @RequestBody Category updatedCategory) {
         return categoryService.updateCategory(categoryId, updatedCategory);
     }
 
-    @DeleteMapping("/categories/{categoryId}")
+    @DeleteMapping("/categories/{categoryId}/")
     public ResponseEntity<Category> deleteCategory(@PathVariable(value = "categoryId") Long categoryId) {
         return categoryService.deleteCategory(categoryId);
     }

@@ -1,5 +1,6 @@
 package com.example.spice_shop_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,6 @@ public class Category {
 
     @Column(name = "description")
     private String description;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    private Set<Product> products;
 
     public Category(Long id, String name, String description) {
         this.id = id;
