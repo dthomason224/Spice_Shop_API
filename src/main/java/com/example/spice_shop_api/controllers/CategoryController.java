@@ -1,6 +1,7 @@
 package com.example.spice_shop_api.controllers;
 
 import com.example.spice_shop_api.models.Category;
+import com.example.spice_shop_api.models.Product;
 import com.example.spice_shop_api.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class CategoryController {
     @GetMapping("/categories/{categoryId}/")
     public ResponseEntity<Category> getCategory(@PathVariable(value = "categoryId") Long categoryId) {
         return categoryService.getCategoryById(categoryId);
+    }
+
+    @GetMapping("/categories/{categoryName}/products/")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable(value = "categoryName") String categoryName) {
+        return categoryService.getProductsByCategory(categoryName);
     }
 
     @PostMapping("/categories/")

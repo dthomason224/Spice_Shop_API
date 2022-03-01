@@ -1,7 +1,9 @@
 package com.example.spice_shop_api.services.impls;
 
 import com.example.spice_shop_api.models.Category;
+import com.example.spice_shop_api.models.Product;
 import com.example.spice_shop_api.repositories.CategoryRepository;
+import com.example.spice_shop_api.repositories.ProductRepository;
 import com.example.spice_shop_api.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,25 +17,31 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
+    private ProductRepository productRepository;
 
     @Autowired
     public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public ResponseEntity<List<Category>> getAllCategories(String name) {
         try {
-            List<Category> products = new ArrayList<>();
+            List<Category> categories = new ArrayList<>();
             if (name != null) {
-                products.addAll(categoryRepository.findByNameContaining(name));
+                categories.addAll(categoryRepository.findByNameContaining(name));
             } else {
-                products.addAll(categoryRepository.findAll());
+                categories.addAll(categoryRepository.findAll());
             }
-            if (products.isEmpty()) {
+            if (categories.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(products, HttpStatus.OK);
+            return new ResponseEntity<>(categories, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -88,9 +96,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResponseEntity<Category> addCategoryToProduct(Category categoryObject, Long productId) {
-        return null;
-    }
+    public ResponseEntity<List<Product>> getProductsByCategory(String name) {
+        try {
+            List<Product> products = productRepository.findAllByCategoryName(name);
 
+            if (products.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(products, HttpStatus.OK);
+
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
