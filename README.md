@@ -62,7 +62,8 @@ Orders are stored in database with user and date.
 |PUT|/api/cart-item//{cartItemId}/|quantity, product|none|update specified cart item by id|Public|
 |DELETE|/api/cart-item//{cartItemId}/|none|none|delete specified cart item by id|Public|
 
-#Product Page Wireframe
+# Product Page Wireframe
+![wireframe](wireframe.png)
 
 # Tools
 ## Front-end
