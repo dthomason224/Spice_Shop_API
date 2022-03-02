@@ -68,13 +68,13 @@ Orders are stored in database with user and date.
 ## Front-end
 <img src="angular.png" width="150" height="150">
 Angular 
-<img src="angular.png" width="150" height="150">
+<img src="material.png" width="150" height="150">
 Angular Material
 
-##Back-end
-<img src="angular.png" width="150" height="150">
+## Back-end
+<img src="spring.png" width="150" height="150">
 Spring Boot 
-<img src="angular.png" width="150" height="150">
+<img src="postgres.png" width="150" height="150">
 Postgres 
 
 # Challenges 
