@@ -66,21 +66,22 @@ Orders are stored in database with user and date.
 
 # Tools
 ## Front-end
-- <img src="angular.png" width="150" height="150">
+<img src="angular.png" width="150" height="150">
 Angular 
-- <img src="angular.png" width="150" height="150">
+<img src="angular.png" width="150" height="150">
 Angular Material
 
 ##Back-end
-img src="angular.png" width="150" height="150">
+<img src="angular.png" width="150" height="150">
 Spring Boot 
 <img src="angular.png" width="150" height="150">
 Postgres 
 
 # Challenges 
+The biggest challenge was working with Angular. How to use and resuse components is very complex. As well as being able to effciently pass data between the components. It will take some time to learn how to manage how the components will fit into place in the app.
 
 # Future
-
+For the future i want to be able to add authorization and authentication for added users, so their can be unique carts for every user. Roles will allow certain users to manipulate the database through the API. Also their should be more feedback for events so users can know if something was successful
 
 # Frontend Repo
 https://github.com/dthomason224/Spice_Shop_Frontend
